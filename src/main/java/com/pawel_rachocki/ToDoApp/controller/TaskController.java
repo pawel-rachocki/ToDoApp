@@ -21,7 +21,7 @@ public class TaskController {
     public String getTasks(Model model) {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
-        return "tasks"; // Renderuje tasks.html
+        return "tasks"; // Render tasks.html
     }
 
     @PostMapping("/add")
@@ -30,15 +30,17 @@ public class TaskController {
         return "redirect:/";
     }
 
-    @PostMapping("/complete/{id}")
-    public String completeTask(@PathVariable String id) {
+    @PostMapping("/complete")
+    public String completeTask(@RequestParam String id) {
         taskService.completeTask(id);
         return "redirect:/";
     }
-    @PostMapping("/delete/{id}")
-    public String deleteTask(@PathVariable String id) {
+
+    @PostMapping("/delete")
+    public String deleteTask(@RequestParam String id) {
         taskService.deleteTask(id);
         return "redirect:/";
     }
+
 
 }
