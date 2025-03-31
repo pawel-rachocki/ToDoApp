@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>ToDo App - Pawel Rachocki</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .task { display: flex; justify-content: space-between; padding: 10px; border: 1px solid #ccc; margin: 5px; }
+        .completed { text-decoration: line-through; color: gray; }
+        .button { padding: 5px 10px; cursor: pointer; }
+    </style>
 </head>
 <body>
-<h1> ToDo Application - Pawel Rachocki </h1>
+
+<h1>ToDo App - Pawel Rachocki</h1>
+
+<!-- FORMULARZ DODAWANIA -->
+<form action="/add" method="post">
+    <input type="text" name="name" placeholder="Dodaj nowe zadanie..." required>
+    <button type="submit" class="button">Dodaj</button>
+</form>
+
+<!-- LISTA ZADAŃ -->
 <div>
-    <th:block th:each="task : ${tasks}">
-        <div>
-            <span> th:text="${task.name}"</span>
-        </div>
-    </th:block>
+    <div th:each="task : ${tasks}" class="task">
+        <span th:text="${task.name}" th:classappend="${task.completed} ? 'completed' : ''"></span>
+        <form th:if="${!task.completed}" action="/complete/{id}" method="post">
+            <input type="hidden" name="id" th:value="${task.id}">
+            <button type="submit" class="button">✓</button>
+        </form>
+    </div>
 </div>
+
 </body>
 </html>
