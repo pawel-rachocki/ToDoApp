@@ -14,13 +14,13 @@
 
 <h1>ToDo App - Pawel Rachocki</h1>
 
-<!-- FORMULARZ DODAWANIA -->
+<!-- Adding Form -->
 <form action="/add" method="post">
-    <input type="text" name="name" placeholder="Dodaj nowe zadanie..." required>
+    <input type="text" name="name" placeholder="Add new task..." required>
     <button type="submit" class="button">Dodaj</button>
 </form>
 
-<!-- LISTA ZADAŃ -->
+<!-- Task List -->
 <div>
     <div th:each="task : ${tasks}" class="task">
         <span th:text="${task.name}" th:classappend="${task.completed} ? 'completed' : ''"></span>
