@@ -1,3 +1,36 @@
+<style>
+    .task-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin: 5px;
+    }
+
+    .task-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .task-buttons form {
+        margin: 0;
+    }
+
+    .button {
+        padding: 5px 10px;
+        cursor: pointer;
+        border: none;
+        font-size: 16px;
+    }
+
+    .delete-btn {
+        background-color: red;
+        color: white;
+    }
+</style>
+
+
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -21,16 +54,20 @@
 </form>
 
 <!-- Task List -->
-<div>
-    <div th:each="task : ${tasks}" class="task">
-        <span th:text="${task.name}" th:classappend="${task.completed} ? 'completed' : ''"></span>
-        <form th:if="${!task.completed}" action="/complete/{id}" method="post">
+<div th:each="task : ${tasks}" class="task-container">
+    <span th:text="${task.name}" th:classappend="${task.completed} ? 'completed' : ''"></span>
+
+    <div class="task-buttons">
+        <!-- Toggle task as complete -->
+        <form th:if="${!task.completed}" action="/complete" method="post">
             <input type="hidden" name="id" th:value="${task.id}">
             <button type="submit" class="button">✓</button>
         </form>
-        <form action="/delete/{id}" method="post">
+
+        <!-- Delete task -->
+        <form action="/delete" method="post">
             <input type="hidden" name="id" th:value="${task.id}">
-            <button type="submit" class="button" style="background-color: red; color: white;">🗑️</button>
+            <button type="submit" class="button delete-btn">🗑️</button>
         </form>
     </div>
 </div>
