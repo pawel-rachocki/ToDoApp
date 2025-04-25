@@ -18,7 +18,7 @@ It allows users to create, complete, and delete tasks through a clean web interf
 
 ## 📷 Screenshot
 
-![Image Alt](image_url)
+![Image Alt](https://github.com/pawel-rachocki/ToDoApp/blob/main/ToDo.png?raw=true)
 
 ---
 
